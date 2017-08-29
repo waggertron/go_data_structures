@@ -1,5 +1,7 @@
 package set
 
+import "sort"
+
 type intSet struct {
 	items map[int]bool
 }
@@ -38,6 +40,33 @@ func (s *intSet) Intersection(s2 *intSet) intSet {
 		}
 	}
 	return inter
+}
+
+func (s *intSet) Union(s2 *intSet) intSet {
+	union := IntSet()
+	for num := range s.items {
+		union.Add(num)
+	}
+	for num := range s2.items {
+		union.Add(num)
+	}
+	return union
+}
+
+func (s *intSet) Items() []int {
+	items := make([]int, 0, len(s.items))
+	for num := range s.items {
+		items = append(items, num)
+	}
+	return items
+}
+func (s *intSet) SortedItems() []int {
+	items := make([]int, 0, len(s.items))
+	for num := range s.items {
+		items = append(items, num)
+	}
+	sort.Ints(items)
+	return items
 }
 
 // func (s *intSet) add(nums ...int) {
